@@ -36,7 +36,7 @@ public class StudentBudgeting extends Application
 
         Button loginBtn = new Button("Login");
         Button registerBtn = new Button("Register");
-        Label StudentChecker = new Label("Students loaded: " + Students.getStudentList().size());
+        Label StudentChecker = new Label("Students signed up: " + Students.getStudentList().size());
 
         loginBtn.setOnAction(e -> {
             openLoginWindow();
