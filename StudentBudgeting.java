@@ -145,7 +145,7 @@ public class StudentBudgeting extends Application
                     message.setText("This Student ID is already taken."); 
                 }else if (idlength.length() != 7){   
                     message.setText("Your Student ID is not the correct length.");
-                    return;
+                    return;  
                 } else if (!email.endsWith("@study.beds.ac.uk")) {
                     message.setText("The email provided is not a bedfordshire student email.");
                     return;
