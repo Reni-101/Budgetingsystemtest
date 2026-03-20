@@ -111,19 +111,19 @@ public class Students
     
     // method called at the main menu, inserts test data into the student array list if it has not.
     public static void loadSampleStudents() {
-    if (sampleLoaded) return;  
-    sampleLoaded = true;
-    
-    new Students(2501001, "Alice Johnson", "alice.johnson@study.beds.ac.uk", "pass123", 500.0);
-    new Students(2501002, "Ben Carter", "ben.carter@study.beds.ac.uk", "qwerty", 450.0);
-    new Students(2501003, "Chloe Smith", "chloe.smith@study.beds.ac.uk", "abc123", 600.0);
-    new Students(2501004, "Daniel Green", "daniel.green@study.beds.ac.uk", "mypassword", 300.0);
-    new Students(2501005, "Ella Brown", "ella.brown@study.beds.ac.uk", "brownella", 550.0);
-    new Students(2501006, "Farah Khan", "farah.khan@study.beds.ac.uk", "farah2024", 700.0);
-    new Students(2501007, "George Wilson", "george.wilson@study.beds.ac.uk", "wilson123", 400.0);
-    new Students(2501008, "Hannah Lee", "hannah.lee@study.beds.ac.uk", "leeH!", 650.0);
-    new Students(2501009, "Isaac Turner", "isaac.turner@study.beds.ac.uk", "turner321", 480.0);
-    new Students(2501010, "Jasmine Patel", "jasmine.patel@study.beds.ac.uk", "jasminex", 520.0);
+        if (sampleLoaded) return;
+        sampleLoaded = true;
+
+        studentList.add(new Students(2501001, "Alice Johnson", "alice.johnson@study.beds.ac.uk", "pass123", 500.0));
+        studentList.add(new Students(2501002, "Ben Carter", "ben.carter@study.beds.ac.uk", "qwerty", 450.0));
+        studentList.add(new Students(2501003, "Chloe Smith", "chloe.smith@study.beds.ac.uk", "abc123", 600.0));
+        studentList.add(new Students(2501004, "Daniel Green", "daniel.green@study.beds.ac.uk", "mypassword", 300.0));
+        studentList.add(new Students(2501005, "Ella Brown", "ella.brown@study.beds.ac.uk", "brownella", 550.0));
+        studentList.add(new Students(2501006, "Farah Khan", "farah.khan@study.beds.ac.uk", "farah2024", 700.0));
+        studentList.add(new Students(2501007, "George Wilson", "george.wilson@study.beds.ac.uk", "wilson123", 400.0));
+        studentList.add(new Students(2501008, "Hannah Lee", "hannah.lee@study.beds.ac.uk", "leeH!", 650.0));
+        studentList.add(new Students(2501009, "Isaac Turner", "isaac.turner@study.beds.ac.uk", "turner321", 480.0));
+        studentList.add(new Students(2501010, "Jasmine Patel", "jasmine.patel@study.beds.ac.uk", "jasminex", 520.0));
     }
     // used to update the massword if the passed password matches the student s's password.
     public static boolean ValidateUpdatingPassword(int currentid, String password){

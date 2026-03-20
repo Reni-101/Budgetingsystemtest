@@ -97,16 +97,16 @@ public class Income
         if (sampleLoaded) return;
         sampleLoaded = true;
         
-        new Income(2001, 1200.00, 'M', Students.getStudentByID(2501001));
-        new Income(2002, 150.00, 'W', Students.getStudentByID(2501002));
-        new Income(2003, 300.00, 'M', Students.getStudentByID(2501003));
-        new Income(2004, 80.00, 'W', Students.getStudentByID(2501004));
-        new Income(2005, 500.00, 'M', Students.getStudentByID(2501005));
-        new Income(2006, 200.00, 'W', Students.getStudentByID(2501006));
-        new Income(2007, 1000.00, 'M', Students.getStudentByID(2501007));
-        new Income(2008, 250.00, 'W', Students.getStudentByID(2501008));
-        new Income(2009, 900.00, 'M', Students.getStudentByID(2501009));
-        new Income(2010, 400.00, 'W', Students.getStudentByID(2501010));
+        incomeList.add(new Income(2001, 1200.00, 'M', Students.getStudentByID(2501001)));
+        incomeList.add(new Income(2002, 150.00, 'W', Students.getStudentByID(2501002)));
+        incomeList.add(new Income(2003, 300.00, 'M', Students.getStudentByID(2501003)));
+        incomeList.add(new Income(2004, 80.00, 'W', Students.getStudentByID(2501004)));
+        incomeList.add(new Income(2005, 500.00, 'M', Students.getStudentByID(2501005)));
+        incomeList.add(new Income(2006, 200.00, 'W', Students.getStudentByID(2501006)));
+        incomeList.add(new Income(2007, 1000.00, 'M', Students.getStudentByID(2501007)));
+        incomeList.add(new Income(2008, 250.00, 'W', Students.getStudentByID(2501008)));
+        incomeList.add(new Income(2009, 900.00, 'M', Students.getStudentByID(2501009)));
+        incomeList.add(new Income(2010, 400.00, 'W', Students.getStudentByID(2501010)));
     }
 }
    

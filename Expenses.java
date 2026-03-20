@@ -103,15 +103,15 @@ public class Expenses
         if (sampleLoaded) return; 
         sampleLoaded = true;
         
-        new Expenses(3001, 50.00, 'F', 'W', Students.getStudentByID(2501001));   // Food
-        new Expenses(3002, 120.00, 'T', 'M', Students.getStudentByID(2501002));  // Transport
-        new Expenses(3003, 30.00, 'E', 'W', Students.getStudentByID(2501003));   // Entertainment
-        new Expenses(3004, 400.00, 'R', 'M', Students.getStudentByID(2501004));  // Rent
-        new Expenses(3005, 25.00, 'F', 'W', Students.getStudentByID(2501005));
-        new Expenses(3006, 60.00, 'U', 'M', Students.getStudentByID(2501006));   // Utilities
-        new Expenses(3007, 15.00, 'E', 'W', Students.getStudentByID(2501007));
-        new Expenses(3008, 300.00, 'R', 'M', Students.getStudentByID(2501008));
-        new Expenses(3009, 45.00, 'F', 'W', Students.getStudentByID(2501009));
-        new Expenses(3010, 100.00, 'T', 'M', Students.getStudentByID(2501010));
+        expensesList.add(new Expenses(3001, 50.00, 'F', 'W', Students.getStudentByID(2501001)));   // Food
+        expensesList.add(new Expenses(3002, 120.00, 'T', 'M', Students.getStudentByID(2501002)));  // Transport
+        expensesList.add(new Expenses(3003, 30.00, 'E', 'W', Students.getStudentByID(2501003)));   // Entertainment
+        expensesList.add(new Expenses(3004, 400.00, 'R', 'M', Students.getStudentByID(2501004)));  // Rent
+        expensesList.add(new Expenses(3005, 25.00, 'F', 'W', Students.getStudentByID(2501005)));
+        expensesList.add(new Expenses(3006, 60.00, 'U', 'M', Students.getStudentByID(2501006)));   // Utilities
+        expensesList.add(new Expenses(3007, 15.00, 'E', 'W', Students.getStudentByID(2501007)));
+        expensesList.add(new Expenses(3008, 300.00, 'R', 'M', Students.getStudentByID(2501008)));
+        expensesList.add(new Expenses(3009, 45.00, 'F', 'W', Students.getStudentByID(2501009)));
+        expensesList.add(new Expenses(3010, 100.00, 'T', 'M', Students.getStudentByID(2501010)));
     }
 }
