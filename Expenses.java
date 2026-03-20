@@ -1,20 +1,23 @@
+//imports the built in utility to use arraylist - this is used to store the Expense data as objects
 import java.util.ArrayList;
 
 public class Expenses
 {
-    // instance variables - replace the example below with your own
+    // instance variables
     private int Expense_ID;
     private double Expense_Amount;
     private char Expense_Category;
     private char Expense_TimeFrame;
     private int Student_ID;
+    // variable to remember that the test data has loaded 
+
     private static boolean sampleLoaded = false;
+    
     
     private static ArrayList<Expenses> expensesList = new ArrayList<>();
     
-    /**
-     * Constructor for objects of class Expenses
-     */
+    // Constructor for objects of class Expenses
+
     public Expenses(int Expense_ID,double Expense_Amount,char Expense_Category,char Expense_TimeFrame, Students s)
     {
         this.Expense_ID = Expense_ID;
@@ -23,12 +26,15 @@ public class Expenses
         this.Expense_TimeFrame = Expense_TimeFrame;
         this.Student_ID = s.getStudent_ID();
     }
-
+    
+    // getters for the Expenses attributes
     public int getExpense_ID(){return Expense_ID;}
     public double getExpense_Amount(){return Expense_Amount;}
     public char getExpense_Category(){return Expense_Category;}
     public char getExpense_TimeFrame(){return Expense_TimeFrame;}
     public int getStudent_ID(){return Student_ID;}
+    
+    // setters for the Expenses attributes
     
     public void setExpense_ID(int ID){this.Expense_ID = ID;}
     public void setExpense_Amount(double Amount){this.Expense_Amount = Amount;}
@@ -36,11 +42,12 @@ public class Expenses
     public void setExpense_TimeFrame(char TimeFrame){this.Expense_TimeFrame = TimeFrame;}    
     public void setStudent_ID(int ID) { this.Student_ID = ID; }
 
-    
+    //adds the passed expense object into the expense list
     public static void addExpense(Expenses e) {
     expensesList.add(e);
     }
     
+    // allows the expense list to be accessed outside of the expense class with this function
     public static ArrayList<Expenses> getExpensesList() {
     return expensesList;
     }
@@ -84,14 +91,14 @@ public class Expenses
         }
         return false;
     }
-    
+    // finds the last id in the expense list - used to 
     public static int getLastExpenseID(){
         if (!expensesList.isEmpty()){
             return expensesList.get(expensesList.size() - 1).getExpense_ID();
         }
             return 0;
     }
-    
+    // function that loads sample Expense data
     public static void loadSampleExpenses(){
         if (sampleLoaded) return; 
         sampleLoaded = true;

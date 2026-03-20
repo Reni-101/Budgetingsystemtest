@@ -1,8 +1,9 @@
+//imports the built in utility to use arraylist - this is used to store the Students data as objects
 import java.util.ArrayList;
 
 public class Students
 {
-
+    //
     private int Student_ID;
     private String Student_FullName;
     private String Student_Email;
@@ -12,7 +13,7 @@ public class Students
     private static boolean sampleLoaded = false;
     private static ArrayList<Students> studentList = new ArrayList<>();
 
-
+    //Constructor for Student
     public Students(int Student_ID, String Student_FullName, String Student_Email, String Student_Password, double Monthly_Budget)
     {
         this.Student_ID = Student_ID;
@@ -23,28 +24,29 @@ public class Students
 
     }
 
-
+    // getters for Students class
     public int getStudent_ID() { return Student_ID; }
     public String getStudent_FullName() { return Student_FullName; }
     public String getStudent_Email() { return Student_Email; }
     public String getStudent_Password() { return Student_Password; }
     public double getMonthly_Budget() { return Monthly_Budget; }
 
-
+    // setters for Students class
     public void setStudent_FullName(String name) { this.Student_FullName = name; }
     public void setStudent_Email(String email) { this.Student_Email = email; }
     public void setStudent_Password(String password) { this.Student_Password = password; }
     public void setMonthly_Budget(double budget) { this.Monthly_Budget = budget; }
 
-    
+    //function to add a passed Students object
     public static void addStudent(Students s) {
         studentList.add(s);
     }
+    //returns the studentList - used in the main javafx class
     public static ArrayList<Students> getStudentList() {
     return studentList;
     }
 
-    
+    // Returns a student object with the given student ID
     public static Students getStudentByID(int id) {
         for (Students s : studentList) {
             if (s.getStudent_ID() == id) {
@@ -53,7 +55,7 @@ public class Students
         }
         return null;
     }
-
+    // checks whether the new created ID passed to the method as "id" is present in the studentList
     public static boolean isIDTaken(int id) {
         for (Students s : studentList) {
             if (s.getStudent_ID() == id) {
@@ -62,7 +64,8 @@ public class Students
         }
         return false;         
     }    
-    
+    // method that validates whether the password passed matches the student object
+    //(with the passed studentID id)'s password are the same. returns boolean value.
     public static boolean validateLogin(int id, String password) {
         Students s = getStudentByID(id);
         if (s != null && s.getStudent_Password().equals(password)) {
@@ -71,7 +74,7 @@ public class Students
         return false;
     }
 
-    
+    // view all students (console output)    
     public static void viewAllStudents() {
         for (Students s : studentList) {
             System.out.println("ID: " + s.getStudent_ID() +
@@ -82,7 +85,8 @@ public class Students
 
     
     
- 
+    // deletes a student if a student exists with the id passed as a parameter.
+    // Returns true if successful.
     public static boolean deleteStudent(int id) {
         Students s = getStudentByID(id);
         if (s != null) {
@@ -92,7 +96,7 @@ public class Students
         return false;
     }
 
-    
+    // updates a student if a student exists with the id passed as a parameter.
     public static boolean updateStudent(int id, String newName, String newEmail, String newPassword, double newBudget) {
         Students s = getStudentByID(id);
         if (s != null) {
@@ -105,7 +109,7 @@ public class Students
         return false;
     }
     
-    
+    // method called at the main menu, inserts test data into the student array list if it has not.
     public static void loadSampleStudents() {
     if (sampleLoaded) return;  
     sampleLoaded = true;
@@ -121,7 +125,7 @@ public class Students
     new Students(2501009, "Isaac Turner", "isaac.turner@study.beds.ac.uk", "turner321", 480.0);
     new Students(2501010, "Jasmine Patel", "jasmine.patel@study.beds.ac.uk", "jasminex", 520.0);
     }
-    
+    // used to update the massword if the passed password matches the student s's password.
     public static boolean ValidateUpdatingPassword(int currentid, String password){
         Students s = getStudentByID(currentid);
         if (s != null && password.equals(s.getStudent_Password())){

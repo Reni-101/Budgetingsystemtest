@@ -1,3 +1,4 @@
+// Import Javafx modules start - this is done so built-in classes can be used to create windows, and use specific utilities like comboboxes and tables
 import javax.swing.*;
 import javax.swing.JComboBox;
 import javafx.application.Application;
@@ -18,7 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.List;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+// Importing ends
 
 public class StudentBudgeting extends Application
 {
@@ -27,6 +28,7 @@ public class StudentBudgeting extends Application
 
     @Override
     public void start(Stage primaryStage) {
+        // loads sample students with income and expenses linked to each student object.
         Students.loadSampleStudents();
         Income.loadSampleIncome();
         Expenses.loadSampleExpenses();
@@ -37,20 +39,23 @@ public class StudentBudgeting extends Application
         Button loginBtn = new Button("Login");
         Button registerBtn = new Button("Register");
         Label StudentChecker = new Label("Students signed up: " + Students.getStudentList().size());
-
+        // sets the click action of the login button to open the login window (by calling the function openLoginWindow().) 
+        //Closes the primary stage (the main menu).
         loginBtn.setOnAction(e -> {
             openLoginWindow();
             primaryStage.close();
         });
-
+        
+        // sets the click action of the register button to open the register window (by calling the function openRegisterWindow().) 
+        //Closes the primary stage (the main menu).
         registerBtn.setOnAction(e -> {
             openRegisterWindow();
             primaryStage.close();
         });
-
+        // Adds buttons and labels in a vbox layout
         VBox layout = new VBox(20, loginBtn, registerBtn, StudentChecker);
         layout.setAlignment(Pos.CENTER);
-
+        //sets the size of the window, shows the primary stage.
         Scene scene = new Scene(layout, 400, 300);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -67,32 +72,35 @@ public class StudentBudgeting extends Application
         PasswordField passField = new PasswordField();
 
         Label message = new Label();
-
+        // sets the click condition of the login button to attempt (or throw expection) to login
         Button loginBtn = new Button("Login");
         loginBtn.setOnAction(e -> {
             try {
                 int id = Integer.parseInt(idField.getText());
                 String pass = passField.getText();
-
+                // Checks whether the id of the provided student matches the password provided
                 if (Students.validateLogin(id, pass)) {
                     message.setText("Login successful!");
+                    //stores the current id in an integer variable, then opens the student dashboard while closing the login stage / window
                     currentstudent = id;
                     openDashboard();
                     loginStage.close();
                 } else {
+                    // error message if the password does not match the id (or the id is not attatched to a student)
                     message.setText("Invalid ID or password.");
                 }
             } catch (Exception ex) {
+                // error message if the id is not an integer message
                 message.setText("Please enter a valid ID.");
             }
         });
-
+        // sets the click condition of the back button to close the login window / stage, and open the main menu / stage.
         Button backBtn = new Button("Back");
         backBtn.setOnAction(e -> {
             loginStage.close();
             mainStage.show();
         });
-
+        // sets the layout of this scene to be vbox, putting the labels, textboxes and buttons to fit in this layout.
         VBox layout = new VBox(10, idLabel, idField, passLabel, passField, loginBtn, backBtn, message);
         layout.setAlignment(Pos.CENTER);
 
@@ -103,6 +111,7 @@ public class StudentBudgeting extends Application
 
 
     private void openRegisterWindow() {
+
         Stage registerStage = new Stage();
         registerStage.setTitle("Register");
 
@@ -119,7 +128,7 @@ public class StudentBudgeting extends Application
         PasswordField passField = new PasswordField();
 
         Label message = new Label();
-
+        //sets the click condition for the register button. on click, it attempts to register a student with the inputted data.
         Button registerBtn = new Button("Register");
         registerBtn.setOnAction(e -> {
             try {
@@ -128,7 +137,9 @@ public class StudentBudgeting extends Application
                 String name = nameField.getText();
                 String pass = passField.getText();
                 String email = emailField.getText();
+                //0.0 is a double value used as a default value when registering a student.
                 double monthlybudget = 0.0;
+                // a boolean value (true or false) is found using the isIDTaken function which checks whether the new ID is present in th
                 boolean isTaken = Students.isIDTaken(id);
                 if (isTaken == true){
                     message.setText("This Student ID is already taken."); 
@@ -853,6 +864,7 @@ public class StudentBudgeting extends Application
     }
     
     public static void main(String[] args) {
+        // main function, runs the primary stage.
         launch(args);
     }
 }

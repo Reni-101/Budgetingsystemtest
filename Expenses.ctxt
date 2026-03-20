@@ -2,7 +2,6 @@
 comment0.target=Expenses
 comment1.params=Expense_ID\ Expense_Amount\ Expense_Category\ Expense_TimeFrame\ s
 comment1.target=Expenses(int,\ double,\ char,\ char,\ Students)
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Expenses\r\n
 comment10.params=TimeFrame
 comment10.target=void\ setExpense_TimeFrame(char)
 comment11.params=ID

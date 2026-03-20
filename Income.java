@@ -1,3 +1,4 @@
+//imports the built in utility to use arraylist - this is used to store the Income data as objects
 import java.util.ArrayList;
 
 public class Income
@@ -8,6 +9,7 @@ public class Income
     private char Income_TimeFrame;
     private int Student_ID;
     
+    // variable to remember that the test data has loaded 
     private static boolean sampleLoaded = false;
     
     private static ArrayList<Income> incomeList = new ArrayList<>();
@@ -15,6 +17,7 @@ public class Income
     /**
      * Constructor for objects of class Income
      */
+    // uses Students s as a parameter - Student_ID is a foreign key 
     public Income(int Income_ID, double Income_Amount, char Income_TimeFrame, Students s)
     {
         
@@ -25,25 +28,28 @@ public class Income
 
     }
     
+    
+    // getters for the Income attributes
     public int getIncome_ID(){return Income_ID;}
     public double getIncome_Amount(){return Income_Amount;}
     public char getIncome_TimeFrame(){return Income_TimeFrame;}
     public int getStudent_ID(){return Student_ID;}
     
+    // setters for the income attributes
     public void setIncome_ID(int ID) { this.Income_ID = ID; }
     public void setIncome_Amount(double Amount) { this.Income_Amount = Amount; }
     public void setIncome_TimeFrame(char TimeFrame) { this.Income_TimeFrame = TimeFrame; }
     public void setStudent_ID(int ID) { this.Student_ID = ID; }
     
+    // allows the income list to be accessed outside of the income class with this function
     public static ArrayList<Income> getIncomeList() {
     return incomeList;
     }
-    
+    // function that adds the passed income object into the income list.
     public static void addIncome(Income I) {
         incomeList.add(I);
     }
-
-  
+    // function which returns an income object with the passed ID - returns null if an income with the passed ID does not exist.
     public static Income getIncomeByID(int id) {
         for (Income I : incomeList) {
             if (I.getIncome_ID() == id) {
@@ -53,13 +59,14 @@ public class Income
         return null;
     }
 
+    // Function that prints all income's present in the income list 
     public static void viewAllIncome() {
         for (Income I : incomeList) {
             Students StudentForIncome  = Students.getStudentByID(I.getStudent_ID());
             System.out.println("ID: " + I.getIncome_ID() + ", Income Amount: " + I.getIncome_Amount() + ", Income Time frame: " + I.getIncome_TimeFrame() + ", Student Name: "+ StudentForIncome.getStudent_FullName());
         }
     }
-
+    //deletes income with the passed id.
     public static boolean deleteIncome(int id) {
         Income I = getIncomeByID(id);
         if (I != null) {
@@ -68,7 +75,7 @@ public class Income
         }
         return false;
     }
-
+    //updates income - uses the getIncomeByID function to get an income object. uses the setters to update the income object
     public static boolean updateIncome(int id, double newIncome_Amount, char newIncome_TimeFrame) {
         Income I = getIncomeByID(id);
         if (I != null) {
@@ -78,14 +85,14 @@ public class Income
         }
         return false;
     }
-    
+    //finds the last income ID - used to create a new Income
     public static int getLastIncomeID(){
         if (!incomeList.isEmpty()){
             return incomeList.get(incomeList.size() - 1).getIncome_ID();
         }
             return 0;
     }
-    
+    // function that loads sample Income data
     public static void loadSampleIncome(){
         if (sampleLoaded) return;
         sampleLoaded = true;
