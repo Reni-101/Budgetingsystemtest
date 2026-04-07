@@ -134,5 +134,34 @@ public class Students
         return false;
     }
     
+    
+    public static String checkBudget(int currentstudent, ArrayList<Income> incomeList, ArrayList<Expenses> expensesList) {  
+        double monthlyIncome = Income.calculateMonthlyIncome(currentstudent, incomeList);
+        Students s = getStudentByID(currentstudent);
+        double monthlyExpenses = Expenses.calculateMonthlyExpenses(s.Student_ID, expensesList);
+        System.out.println("Monthly Income: " + monthlyIncome);
+        System.out.println("Monthly Expenses: " + monthlyExpenses);
+
+        if (monthlyIncome >= monthlyExpenses) {
+            System.out.println("Student earns more then they spend.");
+            
+            if (s.Monthly_Budget < monthlyExpenses){
+                return "TT";
+            } else {
+                return "TF";
+            }
+        } else {
+            System.out.println("Spends more than they earn.");
+            if (s.Monthly_Budget < monthlyExpenses){
+                return "FT";
+            } else {
+                return "FF";
+            }
+        }
+        
+    }
+
+
+
 }
 

@@ -182,6 +182,23 @@ public class StudentBudgeting extends Application
         dashStage.setTitle("Dashboard");
         Students tempstudent = Students.getStudentByID(currentstudent);
         Label welcomeMessage = new Label("Hello, " + tempstudent.getStudent_FullName() +"!");
+        String checkBudget = Students.checkBudget(currentstudent, Income.getIncomeList(), Expenses.getExpensesList());
+        Label budgetNotice = new Label("");
+        if (tempstudent.getMonthly_Budget() == 0.0){
+            budgetNotice.setText("Please set a budget.");
+        } else if (checkBudget =="TT"){
+            budgetNotice.setText("You have disposable income and are under your monthly budget.");
+        
+        } else if (checkBudget == "TF"){
+            budgetNotice.setText("You have disposable income but are over your monthly budget!");
+    
+        } else if (checkBudget == "FT"){
+            budgetNotice.setText("You do not have disposable income but are under your monthly budget!");
+            
+        } else if (checkBudget == "FF"){
+            budgetNotice.setText("You do not have disposable income and are over your monthly budget!");
+            
+        }
         Button incomeBtn = new Button("Income Menu");
         Button expenseBtn = new Button("Expense Menu");
         Button profileBtn = new Button("Profile");
@@ -205,7 +222,7 @@ public class StudentBudgeting extends Application
             mainStage.show();
         });
 
-        VBox layout = new VBox(15, welcomeMessage, incomeBtn, expenseBtn, profileBtn, logoutBtn);
+        VBox layout = new VBox(15, welcomeMessage, budgetNotice, incomeBtn, expenseBtn, profileBtn, logoutBtn);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout, 400, 300);

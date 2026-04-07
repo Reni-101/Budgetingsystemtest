@@ -108,5 +108,41 @@ public class Income
         incomeList.add(new Income(2009, 900.00, 'M', Students.getStudentByID(2501009)));
         incomeList.add(new Income(2010, 400.00, 'W', Students.getStudentByID(2501010)));
     }
+    
+    
+    
+    
+    
+    public static double convertToMonthly(double amount, char timeframe) {
+        switch (timeframe) {
+            case 'w':
+                return amount * 52 / 12;
+            case 'm': 
+                return amount;
+            case 'y':
+                return amount / 12;
+            default:
+                return 0;
+        }
+    }
+
+    public static double calculateMonthlyIncome(int studentID, ArrayList<Income> incomeList) {
+        double total = 0;
+
+        for (Income inc : incomeList) {
+            if (inc.getStudent_ID() == studentID) {
+                total += convertToMonthly(inc.getIncome_Amount(), inc.getIncome_TimeFrame());
+            }
+        }
+
+        return total;
+        
+    }
+
+    
+    
+    
+    
+    
 }
    

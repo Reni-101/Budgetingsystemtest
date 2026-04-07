@@ -114,4 +114,42 @@ public class Expenses
         expensesList.add(new Expenses(3009, 45.00, 'F', 'W', Students.getStudentByID(2501009)));
         expensesList.add(new Expenses(3010, 100.00, 'T', 'M', Students.getStudentByID(2501010)));
     }
+    
+    
+    
+    
+    public static double convertToMonthly(double amount, char timeframe) {
+    switch (timeframe) {
+        case 'w': // weekly
+            return amount * 52 / 12;
+        case 'm': // monthly
+            return amount;
+        case 'y': // yearly
+            return amount / 12;
+        default:
+            return 0; // or throw error
+    }
+    
+    
+    }
+    
+    
+    public static double calculateMonthlyExpenses(int studentID, ArrayList<Expenses> expensesList) {
+        double total = 0;
+
+        for (Expenses exp : expensesList) {
+            if (exp.getStudent_ID() == studentID) {
+                total += convertToMonthly(exp.getExpense_Amount(), exp.getExpense_TimeFrame());
+            }
+        }
+
+        return total;
+    }
+
+    
+    
+    
 }
+
+    
+        
