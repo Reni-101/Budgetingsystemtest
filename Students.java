@@ -114,7 +114,7 @@ public class Students
         if (sampleLoaded) return;
         sampleLoaded = true;
 
-        studentList.add(new Students(2501001, "Alice Johnson", "alice.johnson@study.beds.ac.uk", "pass123", 500.0));
+        studentList.add(new Students(2501001, "Alice Johnson", "alice.johnson@study.beds.ac.uk", "pass123", 0.0));
         studentList.add(new Students(2501002, "Ben Carter", "ben.carter@study.beds.ac.uk", "qwerty", 450.0));
         studentList.add(new Students(2501003, "Chloe Smith", "chloe.smith@study.beds.ac.uk", "abc123", 600.0));
         studentList.add(new Students(2501004, "Daniel Green", "daniel.green@study.beds.ac.uk", "mypassword", 300.0));
