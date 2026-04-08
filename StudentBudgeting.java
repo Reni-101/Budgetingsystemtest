@@ -29,6 +29,9 @@ public class StudentBudgeting extends Application
     @Override
     public void start(Stage primaryStage) {
         // loads sample students with income and expenses linked to each student object.
+        Students.loadStudents();
+        Income.loadIncome();
+        Expenses.loadExpenses();
         Students.loadSampleStudents();
         Income.loadSampleIncome();
         Expenses.loadSampleExpenses();
@@ -156,7 +159,7 @@ public class StudentBudgeting extends Application
                 Students.addStudent(new Students(id, name, email, pass, monthlybudget));
                 Students.saveStudents();
 
-
+                // if registration is successfull, a new student is added to the student list, and saved to the ctxt file. Then the login window is opened.
                 message.setText("Registration successful! You can now log in.");
                 openLoginWindow();
                 registerStage.close();
@@ -187,6 +190,7 @@ public class StudentBudgeting extends Application
         Label welcomeMessage = new Label("Hello, " + tempstudent.getStudent_FullName() +"!");
         String checkBudget = Students.checkBudget(currentstudent, Income.getIncomeList(), Expenses.getExpensesList());
         Label budgetNotice = new Label("");
+        // A label that shows whether a student is currently over or under their budget, or if they have more or less income than expenses
         if (tempstudent.getMonthly_Budget() == 0.0){
             budgetNotice.setText("Please set a budget.");
         } else if (checkBudget =="TT"){
@@ -206,15 +210,17 @@ public class StudentBudgeting extends Application
         Button expenseBtn = new Button("Expense Menu");
         Button profileBtn = new Button("Profile");
         Button logoutBtn = new Button("Logout");
-
+        //click condition for the income button. Leads to the income menu
         incomeBtn.setOnAction(e -> {
             openIncomeMenu();
             dashStage.close();
         });
+        //click condition for the expense button. Leads to the expense menu
         expenseBtn.setOnAction(e -> {
             openExpenseMenu();
             dashStage.close();
         });
+        //
         profileBtn.setOnAction(e -> {
             openProfileMenu();
             dashStage.close();
@@ -896,6 +902,7 @@ public class StudentBudgeting extends Application
     public static void main(String[] args) {
         // main function, runs the primary stage.
         launch(args);
+
     }
 }
 

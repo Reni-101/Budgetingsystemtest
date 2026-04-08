@@ -116,6 +116,7 @@ public class Students{
     public static void loadSampleStudents() {
         if (sampleLoaded) return;
         sampleLoaded = true;
+        if (!studentList.isEmpty()) return;
 
         studentList.add(new Students(2501001, "Alice Johnson", "alice.johnson@study.beds.ac.uk", "pass123", 0.0));
         studentList.add(new Students(2501002, "Ben Carter", "ben.carter@study.beds.ac.uk", "qwerty", 450.0));

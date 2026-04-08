@@ -101,6 +101,8 @@ public class Income
     public static void loadSampleIncome(){
         if (sampleLoaded) return;
         sampleLoaded = true;
+        if (!incomeList.isEmpty()) return;
+
         
         incomeList.add(new Income(2001, 1200.00, 'M', Students.getStudentByID(2501001)));
         incomeList.add(new Income(2002, 150.00, 'W', Students.getStudentByID(2501002)));

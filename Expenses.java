@@ -106,7 +106,8 @@ public class Expenses
     public static void loadSampleExpenses(){
         if (sampleLoaded) return; 
         sampleLoaded = true;
-        
+        if (!expensesList.isEmpty()) return;
+
         expensesList.add(new Expenses(3001, 50.00, 'F', 'W', Students.getStudentByID(2501001)));   // Food
         expensesList.add(new Expenses(3002, 120.00, 'T', 'M', Students.getStudentByID(2501002)));  // Transport
         expensesList.add(new Expenses(3003, 30.00, 'E', 'W', Students.getStudentByID(2501003)));   // Entertainment
