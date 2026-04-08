@@ -1,5 +1,9 @@
 //imports the built in utility to use arraylist - this is used to store the Expense data as objects
 import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.util.Scanner;
+import java.io.File;
 
 public class Expenses
 {
@@ -145,6 +149,50 @@ public class Expenses
 
         return total;
     }
+
+    // inside Expenses.java
+
+public static void saveExpenses() {
+    try {
+        PrintWriter pw = new PrintWriter(new FileWriter("expenses.txt"));
+
+        for (Expenses e : expensesList) {
+            pw.println(e.getExpense_ID() + "," +
+                       e.getExpense_Amount() + "," +
+                       e.getExpense_Category() + "," +
+                       e.getExpense_TimeFrame() + "," +
+                       e.getStudent_ID());
+        }
+
+        pw.close();
+    } catch (Exception ex) {
+        System.out.println("Error saving expenses");
+    }
+}
+
+public static void loadExpenses() {
+    expensesList = new ArrayList<>();
+
+    try {
+        Scanner sc = new Scanner(new File("expenses.txt"));
+
+        while (sc.hasNextLine()) {
+            String[] p = sc.nextLine().split(",");
+
+            int id = Integer.parseInt(p[0]);
+            double amount = Double.parseDouble(p[1]);
+            char category = p[2].charAt(0);
+            char timeframe = p[3].charAt(0);
+            int studentID = Integer.parseInt(p[4]);
+
+            expensesList.add(new Expenses(id, amount, category, timeframe, Students.getStudentByID(studentID)));
+        }
+
+        sc.close();
+    } catch (Exception e) {
+        System.out.println("No saved expenses file found");
+    }
+}
 
     
     

@@ -1,5 +1,10 @@
 //imports the built in utility to use arraylist - this is used to store the Income data as objects
 import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.util.Scanner;
+import java.io.File;
+
 
 public class Income
 {
@@ -140,7 +145,48 @@ public class Income
     }
 
     
-    
+    // inside Income.java
+
+public static void saveIncome() {
+    try {
+        PrintWriter pw = new PrintWriter(new FileWriter("income.txt"));
+
+        for (Income i : incomeList) {
+            pw.println(i.getIncome_ID() + "," +
+                       i.getIncome_Amount() + "," +
+                       i.getIncome_TimeFrame() + "," +
+                       i.getStudent_ID());
+        }
+
+        pw.close();
+    } catch (Exception e) {
+        System.out.println("Error saving income");
+    }
+}
+
+public static void loadIncome() {
+    incomeList = new ArrayList<>();
+
+    try {
+        Scanner sc = new Scanner(new File("income.txt"));
+
+        while (sc.hasNextLine()) {
+            String[] p = sc.nextLine().split(",");
+
+            int id = Integer.parseInt(p[0]);
+            double amount = Double.parseDouble(p[1]);
+            char timeframe = p[2].charAt(0);
+            int studentID = Integer.parseInt(p[3]);
+
+            incomeList.add(new Income(id, amount, timeframe, Students.getStudentByID(studentID)));
+        }
+
+        sc.close();
+    } catch (Exception e) {
+        System.out.println("No saved income file found");
+    }
+}
+
     
     
     

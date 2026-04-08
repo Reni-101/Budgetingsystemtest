@@ -154,6 +154,9 @@ public class StudentBudgeting extends Application
                     return;
                 }
                 Students.addStudent(new Students(id, name, email, pass, monthlybudget));
+                Students.saveStudents();
+
+
                 message.setText("Registration successful! You can now log in.");
                 openLoginWindow();
                 registerStage.close();
@@ -258,9 +261,13 @@ public class StudentBudgeting extends Application
 
                     if (!newPass.isEmpty()) {
                         s.setStudent_Password(newPass);
+                        
+
                     }
                     s.setMonthly_Budget(newBudget);
                     message.setText("Profile updated!");
+                    Students.saveStudents();
+
                     oldpassField.setText("");
                     passField.setText("");
                     
@@ -356,6 +363,7 @@ public class StudentBudgeting extends Application
                 Income newincome = new Income(id, amount, timeFrame, wholecurrentstudent);
                 Income.addIncome(newincome);
                 messageLabel.setText("Income added successfully!");
+                Income.saveIncome();
                 amountField.setText("");
                 timeFrameCombo.setValue("M - Monthly");
             } catch (Exception ex) {
@@ -459,6 +467,7 @@ public class StudentBudgeting extends Application
                 if (updated){
                     updateButton.setDisable(true); 
                     searchField.setEditable(true);
+                    Income.saveIncome();
                     
                 }
             } catch (Exception ex) {
@@ -543,6 +552,7 @@ public class StudentBudgeting extends Application
                     boolean deleted = Income.deleteIncome(id);
                     if (deleted) {
                     messageLabel.setText("Income deleted successfully!");
+                    Income.saveIncome();
                     searchField.clear();
                     } else {
                     messageLabel.setText("No income found with that ID.");
@@ -654,6 +664,7 @@ public class StudentBudgeting extends Application
                 Expenses.addExpense(newExpense);
 
                 messageLabel.setText("Expense added successfully!");
+                Expenses.saveExpenses();
                 amountField.clear();
                 categoryCombo.setValue("F - Food");
                 timeFrameCombo.setValue("M - Monthly");
@@ -770,6 +781,7 @@ public class StudentBudgeting extends Application
                 if (updated) {
                     updateButton.setDisable(true);
                     searchField.setEditable(true);
+                    Expenses.saveExpenses();
                 }
 
             } catch (Exception ex) {
@@ -852,6 +864,7 @@ public class StudentBudgeting extends Application
 
                     if (deleted) {
                         messageLabel.setText("Expense deleted!");
+                        Expenses.saveExpenses();
                         searchField.clear();
                     } else {
                         messageLabel.setText("Delete failed.");

@@ -1,8 +1,11 @@
 //imports the built in utility to use arraylist - this is used to store the Students data as objects
 import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.util.Scanner;
+import java.io.File;
 
-public class Students
-{
+public class Students{
     //
     private int Student_ID;
     private String Student_FullName;
@@ -160,6 +163,51 @@ public class Students
         }
         
     }
+
+    // inside Students.java
+ 
+public static void saveStudents() {
+    try {
+        PrintWriter pw = new PrintWriter(new FileWriter("students.txt"));
+
+        for (Students s : studentList) {
+            pw.println(s.getStudent_ID() + "," +
+                       s.getStudent_FullName() + "," +
+                       s.getStudent_Email() + "," +
+                       s.getMonthly_Budget());
+        }
+
+        pw.close();
+    } catch (Exception e) {
+        System.out.println("Error saving students");
+    }
+}
+
+public static void loadStudents() {
+    studentList = new ArrayList<>();
+
+    try {
+        Scanner sc = new Scanner(new File("students.txt"));
+
+        while (sc.hasNextLine()) {
+            String[] p = sc.nextLine().split(",");
+
+            int id = Integer.parseInt(p[0]);
+            String name = p[1];
+            String email = p[2];
+            String Password = p[3];
+            double budget = Double.parseDouble(p[4]);
+
+            studentList.add(new Students(id, name, email, Password, budget));
+        }
+
+        sc.close();
+    } catch (Exception e) {
+        System.out.println("No saved student file found");
+    }
+}
+
+
 
 
 
