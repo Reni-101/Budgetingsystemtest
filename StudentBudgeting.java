@@ -25,7 +25,14 @@ public class StudentBudgeting extends Application
 {
     private Stage mainStage;
     private int currentstudent;
+    public Label studentChecker;
 
+    
+
+    // method that assigns a label the length of the student array - this was to check that the ctxt file was saving and loading correctly
+    
+
+    
     @Override
     public void start(Stage primaryStage) {
         // loads sample students with income and expenses linked to each student object.
@@ -38,10 +45,14 @@ public class StudentBudgeting extends Application
         
         mainStage = primaryStage;  
         primaryStage.setTitle("Student Budgeting System");
-
+        
         Button loginBtn = new Button("Login");
         Button registerBtn = new Button("Register");
-        Label StudentChecker = new Label("Students signed up: " + Students.getStudentList().size());
+        
+        studentChecker = new Label("Students signed up: " + Students.getStudentList().size());
+    
+
+
         // sets the click action of the login button to open the login window (by calling the function openLoginWindow().) 
         //Closes the primary stage (the main menu).
         loginBtn.setOnAction(e -> {
@@ -56,7 +67,7 @@ public class StudentBudgeting extends Application
             primaryStage.close();
         });
         // Adds buttons and labels in a vbox layout
-        VBox layout = new VBox(20, loginBtn, registerBtn, StudentChecker);
+        VBox layout = new VBox(20, loginBtn, registerBtn, studentChecker);
         layout.setAlignment(Pos.CENTER);
         //sets the size of the window, shows the primary stage.
         Scene scene = new Scene(layout, 400, 300);
@@ -64,6 +75,8 @@ public class StudentBudgeting extends Application
         primaryStage.show();
     }
 
+    
+    
     private void openLoginWindow() {
         Stage loginStage = new Stage();
         loginStage.setTitle("Login");
@@ -101,7 +114,11 @@ public class StudentBudgeting extends Application
         Button backBtn = new Button("Back");
         backBtn.setOnAction(e -> {
             loginStage.close();
+            
+            
             mainStage.show();
+
+
         });
         // sets the layout of this scene to be vbox, putting the labels, textboxes and buttons to fit in this layout.
         VBox layout = new VBox(10, idLabel, idField, passLabel, passField, loginBtn, backBtn, message);
@@ -161,6 +178,7 @@ public class StudentBudgeting extends Application
 
                 // if registration is successfull, a new student is added to the student list, and saved to the ctxt file. Then the login window is opened.
                 message.setText("Registration successful! You can now log in.");
+                studentChecker.setText("Students signed up: " + Students.getStudentList().size());
                 openLoginWindow();
                 registerStage.close();
 
@@ -172,7 +190,9 @@ public class StudentBudgeting extends Application
         Button backBtn = new Button("Back");
         backBtn.setOnAction(e -> {
             registerStage.close();
+            
             mainStage.show();
+
         });
 
         VBox layout = new VBox(10, idLabel, idField, nameLabel, nameField, emailLabel, emailField, passLabel, passField, registerBtn, backBtn, message);
@@ -228,7 +248,9 @@ public class StudentBudgeting extends Application
 
         logoutBtn.setOnAction(e -> {
             dashStage.close();
+            
             mainStage.show();
+
         });
 
         VBox layout = new VBox(15, welcomeMessage, budgetNotice, incomeBtn, expenseBtn, profileBtn, logoutBtn);

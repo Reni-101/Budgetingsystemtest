@@ -175,6 +175,7 @@ public static void saveStudents() {
             pw.println(s.getStudent_ID() + "," +
                        s.getStudent_FullName() + "," +
                        s.getStudent_Email() + "," +
+                       s.getStudent_Password() + "," +
                        s.getMonthly_Budget());
         }
 

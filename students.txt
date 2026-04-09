@@ -1,0 +1,11 @@
+2501001,Alice Johnson,alice.johnson@study.beds.ac.uk,0.0
+2501002,Ben Carter,ben.carter@study.beds.ac.uk,450.0
+2501003,Chloe Smith,chloe.smith@study.beds.ac.uk,600.0
+2501004,Daniel Green,daniel.green@study.beds.ac.uk,300.0
+2501005,Ella Brown,ella.brown@study.beds.ac.uk,550.0
+2501006,Farah Khan,farah.khan@study.beds.ac.uk,700.0
+2501007,George Wilson,george.wilson@study.beds.ac.uk,400.0
+2501008,Hannah Lee,hannah.lee@study.beds.ac.uk,650.0
+2501009,Isaac Turner,isaac.turner@study.beds.ac.uk,480.0
+2501010,Jasmine Patel,jasmine.patel@study.beds.ac.uk,520.0
+1234567,Reni Test,Reni.Test@study.beds.ac.uk,0.0
