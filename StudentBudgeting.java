@@ -327,14 +327,15 @@ public class StudentBudgeting extends Application
     private void openIncomeMenu() {
         Stage incomeStage = new Stage();
         incomeStage.setTitle("Income Menu");
-
+        
         Label label = new Label("Income menu");
+        // sets click condition of the add income button - leads to the add income page.
         Button addIncomePage = new Button("Add Income");
         addIncomePage.setOnAction( e-> {
         openIncomeAddMenu();    
         incomeStage.close();         
         });
-        
+        // sets the click condition of the edit income button - leads to the edit income page.
         Button editIncomePage = new Button("Edit Income");
         editIncomePage.setOnAction( e -> {
             openIncomeEditMenu();
@@ -342,17 +343,19 @@ public class StudentBudgeting extends Application
         
         });
         
+        // Sets the click condition of the view income button - leads to the view income page.
         Button viewIncomePage = new Button("View Income");
         viewIncomePage.setOnAction(e ->{
             openIncomeViewMenu();
             incomeStage.close();
         });
-        
+        // Sets the click condition of the delete income button - leads to the delete income page.
         Button deleteIncomePage = new Button("Delete Income");
         deleteIncomePage.setOnAction(e ->{
             openIncomeDeleteMenu();
             incomeStage.close();
         });
+        // sets the click condition of the back button - leads back to the student's dashboard.
         Button backButton = new Button("Back");
         backButton.setOnAction(e ->{
         openDashboard();
@@ -372,7 +375,7 @@ public class StudentBudgeting extends Application
 
         Label amountLabel = new Label("Income Amount:");
         TextField amountField = new TextField();
-    
+        // Sets the values for the time frame combobox
         Label timeFrameLabel = new Label("Income TimeFrame:");
         ObservableList<String> timeFrameOptions = FXCollections.observableArrayList(
         "W - Weekly",
@@ -382,11 +385,13 @@ public class StudentBudgeting extends Application
         ComboBox<String> timeFrameCombo = new ComboBox<>(timeFrameOptions);
         timeFrameCombo.setValue("M - Monthly");
 
-
+        // sets the click condition of the add button - validates that the inputted data is the correct type, and with put out an error
+        // if there is wrong input
         Button addButton = new Button("Add");
         Label messageLabel = new Label(); 
         addButton.setOnAction(e -> {
             try{    
+                // adds the income to the income list and saves it using the saveincome method
                 double amount = Double.parseDouble(amountField.getText());
                 char timeFrame = (timeFrameCombo.getValue()).charAt(0);
                 int id = Income.getLastIncomeID() + 1;
@@ -402,6 +407,7 @@ public class StudentBudgeting extends Application
             }
         }
         );    
+        // sets the click condition for the back button - opens the income menu and closes the income add page
         Button backButton = new Button("Back");
         backButton.setOnAction(e ->{
             openIncomeMenu();
@@ -429,7 +435,7 @@ public class StudentBudgeting extends Application
 
         Label amountLabel = new Label("New Income Amount:");
         TextField amountField = new TextField();
-
+        // sets the options for the timeframe combobox
         Label timeFrameLabel = new Label("New Income TimeFrame:");
          ObservableList<String> timeFrameOptions = FXCollections.observableArrayList(
         "W - Weekly",
@@ -444,7 +450,7 @@ public class StudentBudgeting extends Application
         
         
         Button backButton = new Button("Back");
-        
+        //sets the click condition for the back button - leads back to the income menu
         backButton.setOnAction( e -> {
             openIncomeMenu();
             IncomeEditstage.close();
@@ -452,7 +458,7 @@ public class StudentBudgeting extends Application
         
         
         });
-        
+        // sets the click condition for the search button. if the income exists and is connected with the current student, its data is shown in the comboboxes and textfields.
         searchButton.setOnAction(e -> {
             try {
                 int id = Integer.parseInt(searchField.getText());
@@ -474,6 +480,7 @@ public class StudentBudgeting extends Application
                     messageLabel.setText("Income found - Edit the fields below.");
                 
                 } else {
+                    // If no income corresponding to the current student is found, it resets the searchfield box.
                     messageLabel.setText("No income connected to you found with that ID.");
                     updateButton.setDisable(true);
                     searchField.setEditable(true);
@@ -486,16 +493,18 @@ public class StudentBudgeting extends Application
                 messageLabel.setText("Error: Enter a valid ID.");
             }
         });
-
+        // sets the click condition of the update button. 
         updateButton.setOnAction(e -> {
             try {
+                // if the editted data is of the right data types, it attempts to update using the updateincome method.
                 int id = Integer.parseInt(searchField.getText());
                 double newAmount = Double.parseDouble(amountField.getText());
                 char newTimeFrame = (timeFrameCombo.getValue()).charAt(0);
-
+                
                 boolean updated = Income.updateIncome(id, newAmount, newTimeFrame);
                 messageLabel.setText(updated ? "Income updated successfully!" : "Update failed.");
                 if (updated){
+                    // if the updated value is true, it saves the edit to the income ctxt file.
                     updateButton.setDisable(true); 
                     searchField.setEditable(true);
                     Income.saveIncome();
@@ -524,7 +533,7 @@ public class StudentBudgeting extends Application
         Stage incomeViewStage = new Stage();
         Students CurrentStudent = Students.getStudentByID(currentstudent);
         incomeViewStage.setTitle("View Incomes for Student " + CurrentStudent.getStudent_FullName());
-
+        // creates the table for viewing the income data, sets the 4 columns.
         TableView<Income> table = new TableView<>();
 
         TableColumn<Income, Integer> idCol = new TableColumn<>("Income ID");
@@ -538,11 +547,11 @@ public class StudentBudgeting extends Application
 
         TableColumn<Income, Integer> studentIdCol = new TableColumn<>("Student ID");
         studentIdCol.setCellValueFactory(new PropertyValueFactory<>("Student_ID"));
-
+        /// adds the specified columns to the table view.
         table.getColumns().addAll(idCol, amountCol, timeFrameCol, studentIdCol);
 
         ArrayList<Income> filtered = new ArrayList<>();
-        
+        // adds incomes with the current students id to an array list. This is then used to make sure the table only shows income relevant to the current student.
         for (Income I : Income.getIncomeList()) {
             if (I.getStudent_ID() == currentstudent) {
                 filtered.add(I);
@@ -550,6 +559,7 @@ public class StudentBudgeting extends Application
         }
 
         table.getItems().addAll(filtered);
+        // sets the click condition of the back button. opens the income menu and closes the income viewing page.
         Button backButton = new Button("Back");
         backButton.setOnAction(e ->{
             openIncomeMenu();
@@ -574,11 +584,13 @@ public class StudentBudgeting extends Application
         TextField searchField = new TextField();
         Button deleteButton = new Button("Delete");
         Label messageLabel = new Label();
-         
+         // sets the click condition for the delete button.
         deleteButton.setOnAction(e -> {
+            // Stores the income that corresponds to the inputted ID in an income object.
             Income incomeToDelete = Income.getIncomeByID(Integer.parseInt(searchField.getText()));
             if(incomeToDelete.getStudent_ID() == currentstudent) {
                 try {
+                    // attemps to delete the income with the income delete method, if "deleted" is true, the income ctxt file is saved.
                     int id = Integer.parseInt(searchField.getText());
                     boolean deleted = Income.deleteIncome(id);
                     if (deleted) {
@@ -592,7 +604,7 @@ public class StudentBudgeting extends Application
                 messageLabel.setText("Error: Enter a valid ID.");
                 }
             }else{
-                messageLabel.setText("No validID given.");    
+                messageLabel.setText("No valid ID given.");    
             }    
         });
         Button backButton = new Button("Back");
@@ -615,30 +627,32 @@ public class StudentBudgeting extends Application
         expenseStage.setTitle("Expense Menu");
 
         Label label = new Label("Income menu");
+        // Sets click condition for the Add Expenses button - opens the add expenses menu, and closes the expenses menu
         Button addExpensesPage = new Button("Add Expenses");
         addExpensesPage.setOnAction( e-> {
             openExpenseAddMenu();    
             expenseStage.close();         
         });
-        
+        // Sets click condition for the edit expenses button - opens the edit expenses menu, and closes the expenses menu
         Button editExpensesPage = new Button("Edit Expenses");
         editExpensesPage.setOnAction( e -> {
             openExpenseEditMenu();
             expenseStage.close(); 
         
         });
-        
+        // Sets click condition for the view expenses button - opens the view expenses menu, and closes the expenses menu
         Button viewExpensesPage = new Button("View Expenses");
         viewExpensesPage.setOnAction(e ->{
             openExpenseViewMenu();
             expenseStage.close();
         });
-        
+        // Sets click condition for the delete expenses button - opens the delete expenses menu, and closes the expenses menu        
         Button deleteExpensesPage = new Button("Delete Expenses");
         deleteExpensesPage.setOnAction(e ->{
             openExpenseDeleteMenu();
             expenseStage.close();
         });
+        // Sets click condition for the back button. opens the student's dashboard, and closes the expenses menu
         Button backButton = new Button("Back");
         backButton.setOnAction(e ->{
             openDashboard();
@@ -659,7 +673,7 @@ public class StudentBudgeting extends Application
 
         Label amountLabel = new Label("Expense Amount:");
         TextField amountField = new TextField();
-
+        // sets the options for the expense category combobox
         Label categoryLabel = new Label("Expense Category:");
         ObservableList<String> categoryOptions = FXCollections.observableArrayList(
             "F - Food",
@@ -668,23 +682,26 @@ public class StudentBudgeting extends Application
             "R - Rent",
             "U - Utilities"
         );
+        // sets the default value to be F for food
         ComboBox<String> categoryCombo = new ComboBox<>(categoryOptions);
         categoryCombo.setValue("F - Food");
-    
+        // sets the options for the expense timeframe
         Label timeFrameLabel = new Label("Expense TimeFrame:");
         ObservableList<String> timeFrameOptions = FXCollections.observableArrayList(
             "W - Weekly",
             "M - Monthly",
             "Y - Yearly"
         );
+        // Sets the default value to be M for monthly.
         ComboBox<String> timeFrameCombo = new ComboBox<>(timeFrameOptions);
         timeFrameCombo.setValue("M - Monthly");
 
         Button addButton = new Button("Add");
         Label messageLabel = new Label();
-
+        // Sets the click condition for the add button
         addButton.setOnAction(e -> {
-            try {
+            try { 
+                // If the inputs are valid, a new expenses object is created, and added to the expense list. This is then saved to the ctxt file.
                 double amount = Double.parseDouble(amountField.getText());
                 char category = categoryCombo.getValue().charAt(0);
                 char timeFrame = timeFrameCombo.getValue().charAt(0);
@@ -693,8 +710,9 @@ public class StudentBudgeting extends Application
 
                 Expenses newExpense = new Expenses(id, amount, category, timeFrame, wholecurrentstudent);
                 Expenses.addExpense(newExpense);
-
+                
                 messageLabel.setText("Expense added successfully!");
+                // values are reset.
                 Expenses.saveExpenses();
                 amountField.clear();
                 categoryCombo.setValue("F - Food");
@@ -704,7 +722,7 @@ public class StudentBudgeting extends Application
                 messageLabel.setText("Error: Please check your inputs.");
             }
         });
-
+        // sets the click condition for the back button - this opens the expenses menu, and closes the add expenses page.
         Button backButton = new Button("Back");
         backButton.setOnAction(e -> {
             openExpenseMenu();
@@ -731,7 +749,7 @@ public class StudentBudgeting extends Application
     
         Label amountLabel = new Label("New Expense Amount:");
         TextField amountField = new TextField();
-
+        // sets the options for the expense category combobox.
         Label categoryLabel = new Label("New Expense Category:");
         ObservableList<String> categoryOptions = FXCollections.observableArrayList(
             "F - Food",
@@ -741,7 +759,7 @@ public class StudentBudgeting extends Application
             "U - Utilities"
         );
         ComboBox<String> categoryCombo = new ComboBox<>(categoryOptions);
-
+        // sets the options for the expense timeframe combobox.
         Label timeFrameLabel = new Label("New Expense TimeFrame:");
         ObservableList<String> timeFrameOptions = FXCollections.observableArrayList(
             "W - Weekly",
@@ -752,13 +770,14 @@ public class StudentBudgeting extends Application
 
         Button updateButton = new Button("Update");
         updateButton.setDisable(true);
-
+        // sets the click condition for the back button - closes the expense edit page and opens the expense menu.
         Button backButton = new Button("Back");
         backButton.setOnAction(e -> {
             openExpenseMenu();
             expenseEditStage.close();
         });
-
+        // sets the click condition for the search button - if the expense corresponding to the inputted id has the foreign key of the current students id, it sets
+        // the comboboxes and textboxes with that expenses data.
         searchButton.setOnAction(e -> {
             try {
                 int id = Integer.parseInt(searchField.getText());
@@ -769,7 +788,7 @@ public class StudentBudgeting extends Application
 
                     char cat = expense.getExpense_Category();
                     char tf = expense.getExpense_TimeFrame();
-
+                    // Sets the combobox with the value corresponding to what the expenses category is.
                     categoryCombo.setValue(
                         cat == 'F' ? "F - Food" :
                         cat == 'T' ? "T - Transport" :
@@ -777,7 +796,7 @@ public class StudentBudgeting extends Application
                         cat == 'R' ? "R - Rent" :
                                   "U - Utilities"
                     );
-
+                    // Sets the combobox with the value corresponding to what the expense timeframe is.
                     timeFrameCombo.setValue(
                         tf == 'W' ? "W - Weekly" :
                         tf == 'M' ? "M - Monthly" :
@@ -797,18 +816,20 @@ public class StudentBudgeting extends Application
                 messageLabel.setText("Error: Enter a valid ID.");
             }
         });
-
+        
+        // sets the click condition for the  update button - if the editted data is in the valid data types, it attempts to update using the updateexpense method.
+        
         updateButton.setOnAction(e -> {
             try {
                 int id = Integer.parseInt(searchField.getText());
                 double newAmount = Double.parseDouble(amountField.getText());
                 char newCategory = categoryCombo.getValue().charAt(0);
                 char newTimeFrame = timeFrameCombo.getValue().charAt(0);
-
+                // If updated returns true, the expense has updated.
                 boolean updated = Expenses.updateExpense(id, newAmount, newCategory, newTimeFrame);
     
                 messageLabel.setText(updated ? "Expense updated!" : "Update failed.");
-
+                // If expenses is true, the expenses ctxt file is updated.
                 if (updated) {
                     updateButton.setDisable(true);
                     searchField.setEditable(true);
@@ -836,7 +857,7 @@ public class StudentBudgeting extends Application
         Students current = Students.getStudentByID(currentstudent);
 
         expenseViewStage.setTitle("Expenses for " + current.getStudent_FullName());
-
+        // Creates a table and the four columns.
         TableView<Expenses> table = new TableView<>();
 
         TableColumn<Expenses, Integer> idCol = new TableColumn<>("Expense ID");
@@ -850,9 +871,9 @@ public class StudentBudgeting extends Application
 
         TableColumn<Expenses, Character> timeFrameCol = new TableColumn<>("TimeFrame");
         timeFrameCol.setCellValueFactory(new PropertyValueFactory<>("Expense_TimeFrame"));
-
+        // Adds the four columns to the table view.
         table.getColumns().addAll(idCol, amountCol, categoryCol, timeFrameCol);
-
+        // adds expenses with the current students id to an array list. This is then used to make sure the table only shows expenses relevant to the current student.
         ArrayList<Expenses> filtered = new ArrayList<>();
         for (Expenses E : Expenses.getExpensesList()) {
             if (E.getStudent_ID() == currentstudent) {
@@ -861,7 +882,7 @@ public class StudentBudgeting extends Application
         }
 
         table.getItems().addAll(filtered);
-
+        // sets the click condition for the back button - closes the expenses view page and opens the expense menu.
         Button backButton = new Button("Back");
         backButton.setOnAction(e -> {
             openExpenseMenu();
@@ -884,7 +905,8 @@ public class StudentBudgeting extends Application
         TextField searchField = new TextField();
         Button deleteButton = new Button("Delete");
         Label messageLabel = new Label();
-
+        // sets the click condition for the delete button - if the id is valid, and the foreign student id is the same as the current student id, then it attempts to --
+        // delete.
         deleteButton.setOnAction(e -> {
             try {
                 int id = Integer.parseInt(searchField.getText());
@@ -892,7 +914,7 @@ public class StudentBudgeting extends Application
 
                 if (expense != null && expense.getStudent_ID() == currentstudent) {
                     boolean deleted = Expenses.deleteExpense(id);
-
+                    // If "deleted" is true, the expense ctxt is overwritten with the edited data.
                     if (deleted) {
                         messageLabel.setText("Expense deleted!");
                         Expenses.saveExpenses();
@@ -909,7 +931,7 @@ public class StudentBudgeting extends Application
                 messageLabel.setText("Error: Enter a valid ID.");
             }
         });
-
+        // sets the click condition for the back button - closes the expense delete page and opens the expense menu.
         Button backButton = new Button("Back");
         backButton.setOnAction(e -> {
             openExpenseMenu();
