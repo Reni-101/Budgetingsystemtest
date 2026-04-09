@@ -10,3 +10,4 @@
 2501010,Jasmine Patel,jasmine.patel@study.beds.ac.uk,jasminex,520.0
 1234567,Test Woman,Test.Woman@study.beds.ac.uk,1234,0.0
 2501111,Sammy Fish,Sammy.Fish@study.beds.ac.uk,Sammy101,0.0
+2343456,Test Person,Test.Person@study.beds.ac.uk,TestTest,500.0
