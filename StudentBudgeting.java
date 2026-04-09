@@ -279,11 +279,13 @@ public class StudentBudgeting extends Application
 
         Label message = new Label();
         
+        // sets the click condition for the save changes button
         Button saveBtn = new Button("Save Changes");
         saveBtn.setOnAction(e -> {
             String currentpass = oldpassField.getText();
             if (Students.ValidateUpdatingPassword(currentstudent, currentpass)){
                 try {
+                    // Attempts to edit the password (when the old password is confirmed) and the budget. Throws an exception if there is an error.
                     double newBudget = Double.parseDouble(budgetField.getText());
                     String newPass = passField.getText();
 
@@ -294,8 +296,9 @@ public class StudentBudgeting extends Application
                     }
                     s.setMonthly_Budget(newBudget);
                     message.setText("Profile updated!");
+                    //Saves the edited student to the text file.
                     Students.saveStudents();
-
+                    //resets the textfields.
                     oldpassField.setText("");
                     passField.setText("");
                     
@@ -306,7 +309,7 @@ public class StudentBudgeting extends Application
                 message.setText("Incorrect Password. Try again.");
             }
         });
-        
+        //sets the click condition for the back button - opens the dashboard and closes the profle menu.
         Button backButton = new Button("Back");
         backButton.setOnAction(e ->{
             openDashboard();
