@@ -56,7 +56,7 @@ public class Expenses
     return expensesList;
     }
 
-// Find expense by ID
+    // Find expense by ID
     public static Expenses getExpenseByID(int id) {
         for (Expenses e : expensesList) {
             if (e.getExpense_ID() == id) {
@@ -66,7 +66,7 @@ public class Expenses
         return null;
     }
 
-// View all expenses (console output)
+    // View all expenses (console output)
     public static void viewAllExpenses() {
         for (Expenses e : expensesList) {
             Students StudentForExpenses  = Students.getStudentByID(e.getStudent_ID());
@@ -74,7 +74,7 @@ public class Expenses
         }
     }
 
-// Delete expense
+    // Delete expense
     public static boolean deleteExpense(int id) {
         Expenses e = getExpenseByID(id);
         if (e != null) {
@@ -84,7 +84,7 @@ public class Expenses
         return false;
     }
 
-// Update expense details
+    // Update expense details
     public static boolean updateExpense(int id, double newAmount, char newCategory, char newTimeFrame) {
         Expenses e = getExpenseByID(id);
         if (e != null) {
@@ -153,52 +153,49 @@ public class Expenses
 
     // inside Expenses.java
 
-public static void saveExpenses() {
-    try {
-        PrintWriter pw = new PrintWriter(new FileWriter("expenses.txt"));
+    public static void saveExpenses() {
+        try {
+            PrintWriter pw = new PrintWriter(new FileWriter("expenses.txt"));
 
-        for (Expenses e : expensesList) {
-            pw.println(e.getExpense_ID() + "," +
+            for (Expenses e : expensesList) {
+                pw.println(e.getExpense_ID() + "," +
                        e.getExpense_Amount() + "," +
                        e.getExpense_Category() + "," +
                        e.getExpense_TimeFrame() + "," +
                        e.getStudent_ID());
-        }
+            }
 
-        pw.close();
-    } catch (Exception ex) {
+            pw.close();
+        } catch (Exception ex) {
         System.out.println("Error saving expenses");
-    }
-}
-
-public static void loadExpenses() {
-    expensesList = new ArrayList<>();
-
-    try {
-        Scanner sc = new Scanner(new File("expenses.txt"));
-
-        while (sc.hasNextLine()) {
-            String[] p = sc.nextLine().split(",");
-
-            int id = Integer.parseInt(p[0]);
-            double amount = Double.parseDouble(p[1]);
-            char category = p[2].charAt(0);
-            char timeframe = p[3].charAt(0);
-            int studentID = Integer.parseInt(p[4]);
-
-            expensesList.add(new Expenses(id, amount, category, timeframe, Students.getStudentByID(studentID)));
         }
-
-        sc.close();
-    } catch (Exception e) {
-        System.out.println("No saved expenses file found");
     }
-}
+
+    public static void loadExpenses() {
+        expensesList = new ArrayList<>();
+
+        try {
+            Scanner sc = new Scanner(new File("expenses.txt"));
+    
+            while (sc.hasNextLine()) {
+                String[] p = sc.nextLine().split(",");
+    
+                int id = Integer.parseInt(p[0]);
+                double amount = Double.parseDouble(p[1]);
+                char category = p[2].charAt(0);
+                char timeframe = p[3].charAt(0);
+                int studentID = Integer.parseInt(p[4]);
+    
+                expensesList.add(new Expenses(id, amount, category, timeframe, Students.getStudentByID(studentID)));
+            }
+
+            sc.close();
+        } catch (Exception e) {
+            System.out.println("No saved expenses file found");
+        }
+    }
 
     
-    
-    
-}
 
-    
+}   
         

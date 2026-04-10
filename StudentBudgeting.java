@@ -388,7 +388,7 @@ public class StudentBudgeting extends Application
         layout.setStyle("-fx-background-color: #B5D8FF; -fx-background-radius: 10;");
         layout.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(layout, 300, 200);
+        Scene scene = new Scene(layout, 300, 300);
         incomeStage.setScene(scene);
         incomeStage.show();
     }
@@ -703,7 +703,7 @@ public class StudentBudgeting extends Application
         layout.setStyle("-fx-background-color: #B5D8FF; -fx-background-radius: 10;");
         layout.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(layout, 300, 200);
+        Scene scene = new Scene(layout, 300, 300);
         expenseStage.setScene(scene);
         expenseStage.show();
     }
